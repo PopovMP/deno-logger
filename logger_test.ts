@@ -12,7 +12,6 @@ import {
   logWarning,
 } from "./mod.ts";
 
-
 initLogger("", { suppress: [], tee: true });
 
 let message = "";

@@ -39,11 +39,11 @@ const colors: Record<string, string> = {
 
 /**
  * Initializes the logger with the path to the log file.
- * 
+ *
  * Options: { tee: boolean, suppress: string[] }
- * 
+ *
  * If `tee` is true, the logger will write to the console and the log file.
- * 
+ *
  * If `suppress` is an array of strings, the logger will not log the messages with these tags.
  */
 export function initLogger(
@@ -85,7 +85,7 @@ export function initLogger(
 
 /**
  * Logs an error message with tag [ERROR] in Red.
- * 
+ *
  * If `tee` is true, the logger will write to the `stderr`.
  */
 export function logError(message: Message, sender?: string): void {
