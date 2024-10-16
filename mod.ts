@@ -1,5 +1,5 @@
 /**
- * #logger
+ * # logger
  * 
  * **logger** is a straightforward, zero dependencies library for logging.
  * It logs to a single predefined file.
