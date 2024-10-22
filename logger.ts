@@ -1,8 +1,9 @@
 import { appendText } from "@popov/file-writer";
 
-type Message = Error | object | string | number;
+import { stat, writeFile } from "node:fs/promises";
+import { EOL } from "node:os";
 
-const EOL = Deno.build.os === "windows" ? "\r\n" : "\n";
+type Message = Error | object | string | number;
 
 export interface LoggerOptions {
   tee?: boolean;
@@ -46,10 +47,10 @@ const colors: Record<string, string> = {
  *
  * If `suppress` is an array of strings, the logger will not log the messages with these tags.
  */
-export function initLogger(
+export async function initLogger(
   logFilePath?: string,
   options?: LoggerOptions,
-): void {
+): Promise<void> {
   if (logFilePath) {
     logPath = logFilePath;
   }
@@ -69,14 +70,14 @@ export function initLogger(
   }
 
   try {
-    const lstat: Deno.FileInfo = Deno.lstatSync(logPath);
-    if (!lstat.isFile) {
+    const stats = await stat(logPath);
+    if (!stats.isFile()) {
       // noinspection ExceptionCaughtLocallyJS
       throw new Error("Log path is not a file.");
     }
   } catch (err) {
-    if (err instanceof Deno.errors.NotFound) {
-      Deno.createSync(logPath);
+    if ((err as NodeJS.ErrnoException).code === "ENOENT") {
+      await writeFile(logPath, "", { encoding: "utf8" });
     } else {
       throw err;
     }

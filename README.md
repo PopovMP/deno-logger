@@ -10,7 +10,7 @@ writes to the console only.
 ```typescript
 // Intialize `logger`in your index.js
 import { initLogger, logInfo } from "jsr@popov/logger";
-initLogger("~/logs/log.txt");
+await initLogger("~/logs/log.txt");
 loggInfo("App started", "app::index");
 
 // Use it in your other files
@@ -55,7 +55,7 @@ import {
   logInfo,
   logText,
 } from "jsr@popov/logger";
-initLogger("logs/log.txt", { tee: true, suppress: ["debug"] });
+await initLogger("logs/log.txt", { tee: true, suppress: ["debug"] });
 
 logInfo("Hello, World!"); // => 2020-08-21 06:21:11 [INFO] Hello, World!
 logInfo("GET index", "app::router"); // => 2020-08-21 06:21:11 [INFO] [app::router] GET index

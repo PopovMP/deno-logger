@@ -1,5 +1,6 @@
 import { ok, strictEqual } from "node:assert";
 import { stderr, stdout } from "node:process";
+import { test } from "node:test";
 
 import {
   getLastError,
@@ -12,7 +13,7 @@ import {
   logWarning,
 } from "./mod.ts";
 
-initLogger("", { suppress: [], tee: true });
+await initLogger("", { suppress: [], tee: true });
 
 let message = "";
 
@@ -26,7 +27,7 @@ console.error = (msg: string) => {
   stderr.write(msg + "\n");
 };
 
-Deno.test("logError", () => {
+test("logError", () => {
   logError("error message", "logger_test.ts");
   ok(message.includes("[ERROR]"));
   ok(message.includes("error message"));
@@ -34,35 +35,35 @@ Deno.test("logError", () => {
   strictEqual(getLastError(), "error message");
 });
 
-Deno.test("logDebug", () => {
+test("logDebug", () => {
   logDebug("debug message", "logger_test.ts");
   ok(message.includes("[DEBUG]"));
   ok(message.includes("debug message"));
   ok(message.includes("logger_test.ts"));
 });
 
-Deno.test("logWarning", () => {
+test("logWarning", () => {
   logWarning("warning message", "logger_test.ts");
   ok(message.includes("[WARNING]"));
   ok(message.includes("warning message"));
   ok(message.includes("logger_test.ts"));
 });
 
-Deno.test("logInfo", () => {
+test("logInfo", () => {
   logInfo("info message", "logger_test.ts");
   ok(message.includes("[INFO]"));
   ok(message.includes("info message"));
   ok(message.includes("logger_test.ts"));
 });
 
-Deno.test("logSuccess", () => {
+test("logSuccess", () => {
   logSuccess("success message", "logger_test.ts");
   ok(message.includes("[SUCCESS]"));
   ok(message.includes("success message"));
   ok(message.includes("logger_test.ts"));
 });
 
-Deno.test("logText", () => {
+test("logText", () => {
   logText("text message");
   ok(message.includes("text message"));
 });

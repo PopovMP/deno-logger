@@ -10,11 +10,11 @@
  * ```typescript
  * // Intialize `logger`in your index.js
  * import { initLogger, logInfo } from "jsr@popov/logger";
- * initLogger("~/logs/log.txt");
+ * await initLogger("~/logs/log.txt");
  * loggInfo("App started", "app::index");
  *
  * // Use it in your other files
- * import  { logInfo, logError } from "jsr@popov/logger";
+ * import { logInfo, logError } from "jsr@popov/logger";
  * logError("Something went wrong", "app::index");
  * ```
  *
@@ -44,7 +44,7 @@
  *
  * ```typescript
  * import { initLogger, logInfo, logError, logText, getLastError } from "jsr@popov/logger";
- * initLogger("logs/log.txt", { tee: true, suppress: ["debug"] });
+ * await initLogger("logs/log.txt", { tee: true, suppress: ["debug"] });
  *
  * logInfo("Hello, World!");                          // => 2020-08-21 06:21:11 [INFO] Hello, World!
  * logInfo("GET index", "app::router");               // => 2020-08-21 06:21:11 [INFO] [app::router] GET index
