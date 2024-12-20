@@ -8,7 +8,7 @@
  *
  * ## Synopsis
  * ```typescript
- * // Intialize `logger`in your index.js
+ * // Initialise `logger`in your index.js
  * import { initLogger, logInfo } from "jsr@popov/logger";
  * await initLogger("~/logs/log.txt");
  * loggInfo("App started", "app::index");
